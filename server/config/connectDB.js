@@ -1,4 +1,6 @@
 import sql from "mssql";
+import dotenv from "dotenv";
+dotenv.config()
 
 const dbConfig = {
   user: process.env.DB_USER,
@@ -16,7 +18,7 @@ const dbConfig = {
 let pool = null;
 let poolPromise = null;
 
-const connectDB = async () => {
+export const connectDB = async () => {
   // Fast path: return existing pool
   if (pool) return pool;
 
@@ -46,6 +48,13 @@ const connectDB = async () => {
 
   return poolPromise;
 };
+
+export const getPool = () => {
+  if (!pool) {
+    throw new Error("Database to connectd. Call connectDB() first.")
+  }
+  return pool
+}
 
 // Optional: graceful shutdown
 export const closeDB = async () => {
