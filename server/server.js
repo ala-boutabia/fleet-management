@@ -3,12 +3,14 @@ import dotenv from "dotenv";
 dotenv.config();
 import { connectDB } from "./config/connectDB.js";
 
-import authRoutes from "./routes/authRoutes.js"
+import authRoutes from "./routes/authRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 const app = express();
 app.use(express.json());
 
-app.use('/api/auth/', authRoutes)
+app.use("/api/auth/", authRoutes);
+app.use("/api/users/", userRoutes);
 
 const PORT = process.env.PORT || 5000;
 const start = async () => {
@@ -19,8 +21,6 @@ const start = async () => {
     console.error("Failed to start server (DB connection error):", err);
     process.exit(1);
   }
-}
-
-
+};
 
 start();
