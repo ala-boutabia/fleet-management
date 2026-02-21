@@ -1,10 +1,10 @@
 import { getPool } from "../config/connectDB.js";
 
-// Get all users(admin only - role_id = 1)
+// Get all users(admin and superadmin only - role_id = 1 or 2)
 export const getAllUsers = async (req, res) => {
   try {
     const role_id = req.user.role_id;
-    console.log("role id: ", role_id);
+    //console.log("role id: ", role_id);
 
     // Block if role is NOT 1 AND NOT 2
     if (role_id !== 1 && role_id !== 2) {
